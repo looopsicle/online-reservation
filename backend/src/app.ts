@@ -1,11 +1,13 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 
 import getDB from './config/db';
 import reservationRoutes from "./routes/reservationRoutes";
 
-async function main()
-{
+async function main() {
     await getDB();
     const app = express();
 
@@ -15,4 +17,4 @@ async function main()
     app.use("/api/reservations", reservationRoutes);
 }
 
-main().catch(console.error)
+main().catch(console.error);
