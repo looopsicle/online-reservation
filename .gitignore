@@ -32,5 +32,6 @@ yarn-error.log
 # Ignore build artifacts in frontend & backend
 /frontend/dist/
 /frontend/node_modules/
+/node_modules/
 /backend/dist/
 /backend/node_modules/
