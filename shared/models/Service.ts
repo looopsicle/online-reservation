@@ -2,10 +2,10 @@ export interface Service {
     id: number;
     name: string;
     description?: string;
-    durationMinutes: number;
+    photo: string;
+    duration_minutes: number;
     price: number;
-    genderPreference?: 'male' | 'female';
-    type: 'massage' | 'facial' | 'hair' | 'nails' | 'bodyTreatment';
-    createdAt?: Date;
-    updatedAt?: Date;
+    type: 'massage' | 'facial' | 'hair' | 'nails';
+    created_at?: Date;
+    updated_at?: Date;
 }

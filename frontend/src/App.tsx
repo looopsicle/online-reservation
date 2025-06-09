@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { User } from '@shared/models';
+import Home from './pages/Home';
+import ServicesPage from './features/services/pages/ServicesPage';
+import ServicesDetail from './features/services/pages/ServicesDetail';
+import ProfilePage from './features/userProfile/pages/ProfilePage';
+import Navbar from './components/Navbar';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './features/auth/pages/LoginPage';
+
+function AppContent() {
+  const { user, logout } = useAuth();
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === '/login';
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="min-h-screen flex flex-col font-sans">
+      {!isLoginPage && <Navbar user={user} onLogout={logout} />}
+
+      <main className="flex-grow bg-gray-50">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/services/:id" element={<ServicesDetail />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </main>
+
+      <footer className="text-pink-300 bg-pink-100 text-center py-4">
+        © 2025 Vioré. All Rights Reserved.
+      </footer>
+    </div>
+  );
 }
 
-export default App
+function App() {
+  console.log('App rendered');
+  return (
+    <AuthProvider>
+        <AppContent />
+    </AuthProvider>
+  );
+}
+
+export default App;

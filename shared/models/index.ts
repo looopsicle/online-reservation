@@ -1,3 +1,3 @@
-export * from './Customer';
 export * from './Service';
-export * from './booking';
+export * from './Booking';
+export * from './User';

@@ -1,12 +1,14 @@
 export type UserRole = 'admin' | 'customer';
 
-export interface Customer {
+export interface User {
     id: number;
     email: string;
-    password?: string;
     name: string;
-    gender: 'male' | 'female';
+    password?: string;
+    gender?: 'male' | 'female'; // opsional, kalau admin tidak perlu gender misal
     phone?: string;
+    role: UserRole;
     createdAt?: Date;
     updatedAt?: Date;
 }
+
